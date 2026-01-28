@@ -1,1 +1,1 @@
-web: ./backend/aleachallenge
+web: go run ./backend/main.go
