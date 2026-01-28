@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YGO Card Finder - Base de Données Yu-Gi-Oh</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1 class="logo">🎴 YGO Card Finder</h1>
+            <p class="tagline">Base de données complète Yu-Gi-Oh! TCG/OCG</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- SECTION RECHERCHE ET FILTRES -->
+        <section class="search-section">
+            <div class="search-box">
+                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Chercher une carte par nom...">
+                <button id="searchBtn" class="search-btn">Chercher</button>
+                <button id="randomBtn" class="random-btn">🎲 Aléatoire</button>
+            </div>
+
+            <!-- FILTRES -->
+            <details class="filters-section" open>
+                <summary class="filters-title">⚙️ Filtres avancés</summary>
+                
+                <div class="filters-grid">
+                    <!-- Type de Carte -->
+                    <div class="filter-group">
+                        <label for="typeFilter">Type:</label>
+                        <select id="typeFilter" class="filter-select">
+                            <option value="">Tous</option>
+                            <option value="Monster">Monstre</option>
+                            <option value="Spell">Magie</option>
+                            <option value="Trap">Piège</option>
+                        </select>
+                    </div>
+
+                    <!-- Attribut -->
+                    <div class="filter-group">
+                        <label for="attributeFilter">Attribut:</label>
+                        <select id="attributeFilter" class="filter-select">
+                            <option value="">Tous</option>
+                            <option value="LIGHT">LIGHT (Lumière)</option>
+                            <option value="DARK">DARK (Ténèbres)</option>
+                            <option value="FIRE">FIRE (Feu)</option>
+                            <option value="WATER">WATER (Eau)</option>
+                            <option value="EARTH">EARTH (Terre)</option>
+                            <option value="WIND">WIND (Vent)</option>
+                            <option value="DIVINE">DIVINE (Divin)</option>
+                        </select>
+                    </div>
+
+                    <!-- Niveau/Rang -->
+                    <div class="filter-group">
+                        <label for="levelFilter">Niveau/Rang:</label>
+                        <select id="levelFilter" class="filter-select">
+                            <option value="">Tous</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+                    </div>
+
+                    <!-- Race (Type de Monstre) -->
+                    <div class="filter-group">
+                        <label for="raceFilter">Race:</label>
+                        <select id="raceFilter" class="filter-select">
+                            <option value="">Tous</option>
+                            <option value="Warrior">Guerrier</option>
+                            <option value="Spellcaster">Magicien</option>
+                            <option value="Fairy">Fée</option>
+                            <option value="Fiend">Démon</option>
+                            <option value="Zombie">Zombie</option>
+                            <option value="Machine">Machine</option>
+                            <option value="Aqua">Aqua</option>
+                            <option value="Pyro">Pyro</option>
+                            <option value="Rock">Rocher</option>
+                            <option value="Winged Beast">Bête Ailée</option>
+                            <option value="Plant">Plante</option>
+                            <option value="Insect">Insecte</option>
+                            <option value="Thunder">Tonnerre</option>
+                            <option value="Dragon">Dragon</option>
+                            <option value="Beast">Bête</option>
+                            <option value="Beast-Warrior">Guerrier-Bête</option>
+                            <option value="Dinosaur">Dinosaure</option>
+                            <option value="Fish">Poisson</option>
+                            <option value="Sea Serpent">Serpent Marin</option>
+                            <option value="Reptile">Reptile</option>
+                            <option value="Wyrm">Wyrm</option>
+                            <option value="Cyberse">Cyberse</option>
+                        </select>
+                    </div>
+
+                    <!-- Banlist -->
+                    <div class="filter-group">
+                        <label for="banlistFilter">Banlist:</label>
+                        <select id="banlistFilter" class="filter-select">
+                            <option value="">Tous</option>
+                            <option value="TCG">TCG</option>
+                            <option value="OCG">OCG</option>
+                        </select>
+                    </div>
+
+                    <!-- Bouton Reset -->
+                    <button id="resetBtn" class="reset-btn">🔄 Réinitialiser filtres</button>
+                </div>
+            </details>
+        </section>
+
+        <!-- ZONE DE CHARGEMENT ET ERREUR -->
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <p>Chargement des cartes...</p>
+        </div>
+
+        <div id="error" class="error-box hidden"></div>
+
+        <!-- GRILLE DE CARTES -->
+        <section class="cards-section">
+            <div class="results-info">
+                <span id="resultCount">0 cartes trouvées</span>
+            </div>
+            <div id="cardsGrid" class="cards-grid">
+                <!-- Les cartes s'afficheront ici -->
+            </div>
+        </section>
+
+        <!-- SECTION DECKS OFFICIELS -->
+        <section class="decks-section">
+            <h2 style="color: var(--primary); margin-bottom: 30px; font-size: 2em;">📋 Decks Officiels Gagnants</h2>
+            <div id="decksList" class="decks-grid">
+                <!-- Les decks s'afficheront ici -->
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL DÉTAILS DE LA CARTE -->
+    <div id="cardModal" class="modal hidden">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-body">
+                <div class="modal-image">
+                    <img id="modalImage" src="" alt="Carte">
+                </div>
+                <div class="modal-info">
+                    <h2 id="modalName"></h2>
+                    <div id="modalDetails"></div>
+                    <div id="modalSets"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DÉTAILS DU DECK -->
+    <div id="deckModal" class="modal hidden">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div id="deckModalBody"></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>Données fournies par <a href="https://ygoprodeck.com" target="_blank">YGOProDeck</a> | Powered by API YGOProDeck</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

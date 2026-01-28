@@ -1,15 +1,40 @@
 <hmt>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sample HTML Page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Demo</title>
+
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <center>
-    <Br><h1>Hello World</h1><Br>
-    <p>This is a simple HTML document structure.</p>
-    </center>
-</body></html> 
+
+  <h1>� GEEK CHALLENGES 🔥</h1>
+  <p class="subtitle">Des défis hardcore pour les vrais gamers et geeks!</p>
+
+  <div class="controls">
+    <button id="newChallengeBtn" class="btn btn-primary">Nouveau Défi Geek</button>
+    <div class="filters">
+      <label>Type:</label>
+      <select id="typeFilter">
+        <option value="">Tous les défis</option>
+        <option value="gaming">🕹️ Gaming Hardcore</option>
+        <option value="esports">🏆 Esports</option>
+        <option value="coding">💻 Coding</option>
+        <option value="tech">⚙️ Tech/Hardware</option>
+        <option value="anime">🎌 Anime/Manga</option>
+        <option value="cyber">🔓 Cybersecurity</option>
+        <option value="retro">👾 Retro Gaming</option>
+        <option value="vr">🥽 VR Gaming</option>
+      </select>
+    </div>
+  </div>
+
+  <div id="result" class="challenge-container"></div>
+
+  <script src="script.js"></script>
+</body>
+</html> 
 </hmt>
