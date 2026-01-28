@@ -13,9 +13,15 @@ import (
 )
 
 const (
-	port              = ":8080"
 	ygoprodeckAPIBase = "https://db.ygoprodeck.com/api/v7"
 )
+
+func getPort() string {
+	if port := os.Getenv("PORT"); port != "" {
+		return ":" + port
+	}
+	return ":8080"
+}
 
 type Card struct {
 	ID       int         `json:"id"`
@@ -129,6 +135,7 @@ func main() {
 		fileServer.ServeHTTP(w, r)
 	})
 
+	port := getPort()
 	log.Printf("🚀 Yu-Gi-Oh! API démarrée sur http://localhost%s", port)
 	log.Printf("📚 API YGOProDeck: %s", ygoprodeckAPIBase)
 	if err := http.ListenAndServe(port, mux); err != nil {

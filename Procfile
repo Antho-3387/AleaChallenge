@@ -1,1 +1,1 @@
-web: ./backend/main
+web: ./backend/aleachallenge
